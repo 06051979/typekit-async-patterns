@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>Typekit async loading pattern: Standard snippet at the bottom of the body</title>
+
+    <style type="text/css">
+      h1 {
+        font-family: "adelle-1", Georgia, serif;
+      }
+    </style>
+
+  </head>
+  <body>
+    <h1>Typekit async loading pattern: Standard snippet at the bottom of the body</h1>
+    <p>
+      Takes the standard Typekit snippet and places it at the bottom of the
+      &lt;body&gt; instead of the top of the &lt;head&gt;. This means that the
+      browser parses the entire page before it starts downloading the Typekit
+      fonts.
+    </p>
+    <h2>Recommendations:</h2>
+    <ul>
+      <li>Place this snippet at the bottom of the &lt;body&gt;</li>
+    </ul>
+    <h2>Advantages:</h2>
+    <ul>
+      <li>Loads Typekit fonts at the end of parsing the page (doesn't block page rendering while it loads)</li>
+      <li>Exactly the same number of bytes as the standard Typekit snippet</li>
+    </ul>
+    <h2>Disadvantages:</h2>
+    <ul>
+      <li>Causes a flash of unstyled text (FOUT) in all browsers that can't be controlled or hidden</li>
+      <li>The fonts download and display later since the download doesn't start until the browser is almost done parsing the page</li>
+    </ul>
+
+    <!-- BEGIN TYPEKIT SNIPPET -->
+    <script type="text/javascript" src="http://use.typekit.com/rij7fwm.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <!-- END TYPEKIT SNIPPET -->
+
+  </body>
+</html>

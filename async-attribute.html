@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>Typekit async loading pattern: Script tag with async attribute</title>
+
+    <!-- BEGIN TYPEKIT SNIPPET -->
+    <script type="text/javascript" src="http://use.typekit.com/rij7fwm.js" onload="try{Typekit.load();}catch(e){}" async></script>
+    <!-- END TYPEKIT SNIPPET -->
+
+    <style type="text/css">
+      h1 {
+        font-family: "adelle-1", Georgia, serif;
+      }
+    </style>
+
+  </head>
+  <body>
+    <h1>Typekit async loading pattern: Script tag with async attribute</h1>
+    <p>
+      Adds the "async" property to the standard Typekit snippet, which makes
+      it asynchronous in browsers that support the property. Fonts don't load at
+      all in IE 6-8 because they don't support an onload property on the script
+      tag.
+    </p>
+    <h2>Recommendations:</h2>
+    <ul>
+      <li>Place this snippet at the top of the &lt;head&gt; so the download starts as soon as possible</li>
+    </ul>
+    <h2>Advantages:</h2>
+    <ul>
+      <li>Loads Typekit fonts asynchronously (doesn't block page rendering while it loads) in Firefox 3.6+, Safari 4+, Opera 10.5+, and Chrome</li>
+      <li>Fewer bytes than the standard Typekit snippet</li>
+    </ul>
+    <h2>Disadvantages:</h2>
+    <ul>
+      <li>Typekit fonts don't load at all in IE 6-8 (these browsers don't support onload on &lt;script&gt;)</li>
+      <li>Typekit fonts load in IE9, but not asynchronously (IE9 doesn't support the async property)</li>
+      <li>Causes a flash of unstyled text (FOUT) in browsers that support the async attribute that can't be controlled or hidden</li>
+    </ul>
+  </body>
+</html>

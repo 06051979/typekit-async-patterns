@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>Typekit async loading pattern: jQuery</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+    <!-- BEGIN TYPEKIT SNIPPET -->
+    <script type="text/javascript">
+      TypekitConfig = {
+        kitId: 'rij7fwm'
+      };
+      (function() {
+        $.ajax({
+          url: '//use.typekit.com/' + TypekitConfig.kitId + '.js',
+          dataType: 'script',
+          cache: true,
+          success: function() {
+            try { Typekit.load(TypekitConfig); } catch (e) {}
+          }
+        });
+      })();
+    </script>
+    <!-- END TYPEKIT SNIPPET -->
+
+    <style type="text/css">
+      h1 {
+        font-family: "adelle-1", Georgia, serif;
+      }
+    </style>
+
+  </head>
+  <body>
+    <h1>Typekit async loading pattern: jQuery</h1>
+    <p>
+      This is a loading pattern that takes advantage of jQuery functionality
+      to load Typekit fonts asynchronously while adding fewer bytes to the page
+      than <a href="standard.html">the standard async snippet</a>.
+    </p>
+    <h2>Recommendations:</h2>
+    <ul>
+      <li>Place your jQuery script tag at the top of the &lt;head&gt;</li>
+      <li>Place this snippet directly after the jQuery script tag</li>
+    </ul>
+    <h2>Advantages:</h2>
+    <ul>
+      <li>Loads Typekit fonts asynchronously (doesn't block page rendering while it loads)</li>
+      <li>Fewer bytes because it takes advantage of jQuery</li>
+    </ul>
+    <h2>Disadvantages:</h2>
+    <ul>
+      <li>More bytes than the standard Typekit snippet</li>
+      <li>Causes a flash of unstyled text (FOUT) in all browsers that can't be controlled or hidden</li>
+      <li>Requires jQuery to function</li>
+      <li>Fonts take slightly longer to start downloading since the jQuery script must be downloaded and parsed first</li>
+    </ul>
+  </body>
+</html>

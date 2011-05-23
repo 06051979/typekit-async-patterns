@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>Typekit async loading pattern: Standard async pattern</title>
+
+    <!-- BEGIN TYPEKIT SNIPPET -->
+    <script type="text/javascript">
+      TypekitConfig = {
+        kitId: 'rij7fwm'
+      };
+      (function() {
+        var tk = document.createElement('script');
+        tk.src = '//use.typekit.com/' + TypekitConfig.kitId + '.js';
+        tk.type = 'text/javascript';
+        tk.async = 'true';
+        tk.onload = tk.onreadystatechange = function() {
+          var rs = this.readyState;
+          if (rs && rs != 'complete' && rs != 'loaded') return;
+          try { Typekit.load(TypekitConfig); } catch (e) {}
+        };
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(tk, s);
+      })();
+    </script>
+    <!-- END TYPEKIT SNIPPET -->
+
+    <style type="text/css">
+      h1 {
+        font-family: "adelle-1", Georgia, serif;
+      }
+    </style>
+
+  </head>
+  <body>
+    <h1>Typekit async loading pattern: Standard async pattern</h1>
+    <p>
+      The standard async pattern for loading the Typekit JS asynchronously.
+      Loading asynchronously prevents the Typekit JS download from blocking
+      the rendering of your page.
+    </p>
+    <h2>Recommendations:</h2>
+    <ul>
+      <li>Place this snippet at the top of the &lt;head&gt; so the download starts as soon as possible</li>
+    </ul>
+    <h2>Advantages:</h2>
+    <ul>
+      <li>Loads Typekit fonts asynchronously (doesn't block page rendering while it loads)</li>
+    </ul>
+    <h2>Disadvantages:</h2>
+    <ul>
+      <li>More bytes than the standard Typekit snippet</li>
+      <li>Causes a flash of unstyled text (FOUT) in all browsers that can't be controlled or hidden</li>
+    </ul>
+  </body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>Typekit async loading pattern: Font events</title>
+
+    <!-- BEGIN TYPEKIT SNIPPET -->
+    <script type="text/javascript">
+      TypekitConfig = {
+        kitId: 'rij7fwm',
+        scriptTimeout: 3000
+      };
+      (function() {
+        var h = document.getElementsByTagName('html')[0];
+        h.className += ' wf-loading';
+        var t = setTimeout(function() {
+          h.className = h.className.replace(/(\s|^)wf-loading(\s|$)/g, '');
+          h.className += ' wf-inactive';
+        }, TypekitConfig.scriptTimeout);
+        var tk = document.createElement('script');
+        tk.src = '//use.typekit.com/' + TypekitConfig.kitId + '.js';
+        tk.type = 'text/javascript';
+        tk.async = 'true';
+        tk.onload = tk.onreadystatechange = function() {
+          var rs = this.readyState;
+          if (rs && rs != 'complete' && rs != 'loaded') return;
+          clearTimeout(t);
+          try { Typekit.load(TypekitConfig); } catch (e) {}
+        };
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(tk, s);
+      })();
+    </script>
+    <!-- END TYPEKIT SNIPPET -->
+
+    <style type="text/css">
+      h1 {
+        font-family: "adelle-1", Georgia, serif;
+      }
+      .wf-loading h1 {
+        visibility: hidden;
+      }
+    </style>
+
+  </head>
+  <body>
+    <h1>Typekit async loading pattern: Font events</h1>
+    <p>
+      This is a loading pattern that extends the standard async pattern with
+      additional JS to add a wf-loading font event classname as soon as possible
+      and a wf-inactive font event classname if the Typekit JS fails to load
+      after a configurable number of seconds.
+    </p>
+    <h2>Recommendations:</h2>
+    <ul>
+      <li>Place this snippet at the top of the &lt;head&gt; so the download starts as soon as possible</li>
+    </ul>
+    <h2>Advantages:</h2>
+    <ul>
+      <li>Loads Typekit fonts asynchronously (doesn't block page rendering while it loads)</li>
+      <li>Provides font event classnames as soon as the snippet executes to control the FOUT introduced by asynchronous loading</li>
+    </ul>
+    <h2>Disadvantages:</h2>
+    <ul>
+      <li>More bytes than the standard Typekit snippet</li>
+      <li>More bytes than async snippets that don't provide font events</li>
+      <li>You must write special CSS to hide the FOUT in all browsers (unlike the standard Typekit snippet, where the JS download blocks rendering in every browser except Firefox)</li>
+    </ul>
+  </body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>Typekit async loading pattern: Font events with jQuery</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+    <!-- BEGIN TYPEKIT SNIPPET -->
+    <script type="text/javascript">
+      TypekitConfig = {
+        kitId: 'rij7fwm',
+        scriptTimeout: 3000
+      };
+      (function() {
+        $('html').addClass('wf-loading');
+        var t = setTimeout(function() {
+          $('html').removeClass('wf-loading').addClass('wf-inactive');
+        }, TypekitConfig.scriptTimeout);
+        $.ajax({
+          url: '//use.typekit.com/' + TypekitConfig.kitId + '.js',
+          dataType: 'script',
+          cache: true,
+          success: function() {
+            clearTimeout(t);
+            try { Typekit.load(TypekitConfig); } catch (e) {}
+          }
+        });
+      })();
+    </script>
+    <!-- END TYPEKIT SNIPPET -->
+
+    <style type="text/css">
+      h1 {
+        font-family: "adelle-1", Georgia, serif;
+      }
+      .wf-loading h1 {
+        visibility: hidden;
+      }
+    </style>
+
+  </head>
+  <body>
+    <h1>Typekit async loading pattern: Font events with jQuery</h1>
+    <p>
+      This is a loading pattern that takes advantage of jQuery functionality
+      to provide a wf-loading font event classname as soon as possible and a
+      wf-inactive font event classname if the Typekit JS fails to load after
+      a configurable number of seconds.
+    </p>
+    <h2>Recommendations:</h2>
+    <ul>
+      <li>Place your jQuery script tag at the top of the &lt;head&gt;</li>
+      <li>Place this snippet directly after the jQuery script tag</li>
+    </ul>
+    <h2>Advantages:</h2>
+    <ul>
+      <li>Loads Typekit fonts asynchronously (doesn't block page rendering while it loads)</li>
+      <li>Provides font event classnames as soon as the snippet executes to control the FOUT introduced by asynchronous loading</li>
+      <li>Fewer bytes because it takes advantage of jQuery</li>
+    </ul>
+    <h2>Disadvantages:</h2>
+    <ul>
+      <li>More bytes than the standard Typekit snippet</li>
+      <li>More bytes than async snippets that don't provide font events</li>
+      <li>Requires jQuery to function</li>
+      <li>Fonts take slightly longer to start downloading since the jQuery script must be downloaded and parsed first</li>
+      <li>You must write special CSS to hide the FOUT in all browsers (unlike the standard Typekit snippet, where the JS download blocks rendering in every browser except Firefox)</li>
+    </ul>
+  </body>
+</html>

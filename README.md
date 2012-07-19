@@ -2,7 +2,7 @@
 
 This repository contains example pages that demonstrate different ways of loading the Typekit script asynchronously. These are alternatives to the standard Typekit embed code:
 
-    <script type="text/javascript" src="http://use.typekit.com/KITID.js"></script>
+    <script type="text/javascript" src="//use.typekit.net/KITID.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 
 The standard Typekit embed code has many advantages. It's simple, compact, very easy to implement, and automatically helps to prevent the flash of unstyled text (or FOUT). These advantages make it the right choice for the vast majority of sites.

@@ -7,22 +7,22 @@
 
     <!-- BEGIN TYPEKIT SNIPPET -->
     <script type="text/javascript">
-      TypekitConfig = {
-        kitId: 'rij7fwm',
-        scriptTimeout: 3000
-      };
       (function() {
+        var config = {
+          kitId: 'rij7fwm',
+          scriptTimeout: 3000
+        };
         $('html').addClass('wf-loading');
         var t = setTimeout(function() {
           $('html').removeClass('wf-loading').addClass('wf-inactive');
-        }, TypekitConfig.scriptTimeout);
+        }, config.scriptTimeout);
         $.ajax({
-          url: '//use.typekit.com/' + TypekitConfig.kitId + '.js',
+          url: '//use.typekit.net/' + config.kitId + '.js',
           dataType: 'script',
           cache: true,
           success: function() {
             clearTimeout(t);
-            try { Typekit.load(TypekitConfig); } catch (e) {}
+            try { Typekit.load(config); } catch (e) {}
           }
         });
       })();

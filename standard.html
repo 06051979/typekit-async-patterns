@@ -6,18 +6,18 @@
 
     <!-- BEGIN TYPEKIT SNIPPET -->
     <script type="text/javascript">
-      TypekitConfig = {
-        kitId: 'rij7fwm'
-      };
       (function() {
+        var config = {
+          kitId: 'rij7fwm'
+        };
         var tk = document.createElement('script');
-        tk.src = '//use.typekit.com/' + TypekitConfig.kitId + '.js';
+        tk.src = '//use.typekit.net/' + config.kitId + '.js';
         tk.type = 'text/javascript';
         tk.async = 'true';
         tk.onload = tk.onreadystatechange = function() {
           var rs = this.readyState;
           if (rs && rs != 'complete' && rs != 'loaded') return;
-          try { Typekit.load(TypekitConfig); } catch (e) {}
+          try { Typekit.load(config); } catch (e) {}
         };
         var s = document.getElementsByTagName('script')[0];
         s.parentNode.insertBefore(tk, s);

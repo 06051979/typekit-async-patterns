@@ -14,7 +14,7 @@
         var h = document.getElementsByTagName('html')[0];
         h.className += ' wf-loading';
         var t = setTimeout(function() {
-          h.className = h.className.replace(/(\s|^)wf-loading(\s|$)/g, '');
+          h.className = h.className.replace(/(\s|^)wf-loading(\s|$)/g, ' ');
           h.className += ' wf-inactive';
         }, config.scriptTimeout);
         var tk = document.createElement('script');
